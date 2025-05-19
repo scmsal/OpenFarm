@@ -3,13 +3,13 @@
 
 echo "--- STARTING UP SERVER ---"
 
-sudo service elasticsearch start
+# sudo service elasticsearch start
 #PATH=~/home/vagrant/.rvm/gems/ruby-2.6.1@openfarm/bin/:$PATH
 source /home/vagrant/.rvm/scripts/rvm
 
 rvm reload
 
-ELASTICSEARCH_URL='http://127.0.0.1:9201'
+# ELASTICSEARCH_URL='http://search:9200'
 
 sleep 10
 

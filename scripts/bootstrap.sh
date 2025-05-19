@@ -27,13 +27,13 @@ source /home/vagrant/.rvm/scripts/rvm
 rvm reload
 rvm --default use 2.6.3
 
-echo "--- INSTALLING ELASTICSEARCH ---"
+# echo "--- INSTALLING ELASTICSEARCH ---"
 
-sudo apt-get -y -q=2 install openjdk-7-jre-headless -y
+# sudo apt-get -y -q=2 install openjdk-7-jre-headless -y
 
-wget --quiet https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.0.0/elasticsearch-2.0.0.deb
-sudo dpkg -i elasticsearch-2.0.0.deb
-sudo service elasticsearch start
+# wget --quiet https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.0.0/elasticsearch-2.0.0.deb
+# sudo dpkg -i elasticsearch-2.0.0.deb
+# sudo service elasticsearch start
 
 echo "--- INSTALLING MONGODB ---"
 

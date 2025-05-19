@@ -17,7 +17,7 @@ describe 'Crop search', :js do
   it 'finds individual crops' do
     FactoryBot.create_list(:crop, 10)
     FactoryBot.create :crop, name: 'banana'
-    Crop.searchkick_index.refresh
+    # Crop.searchkick_index.refresh
 
     visit root_path
     fill_in 'q', with: 'banana'
@@ -29,7 +29,7 @@ describe 'Crop search', :js do
   it 'handles empty searches' do
     Crop.collection.drop
     FactoryBot.create_list(:crop, 10)
-    Crop.reindex
+    # Crop.reindex
 
     visit root_path
     fill_in 'q', with: ''
@@ -52,7 +52,7 @@ describe 'Crop search', :js do
   it 'handles empty search results' do
     Crop.collection.drop
     FactoryBot.create_list(:crop, 10)
-    Crop.searchkick_index.refresh
+    # Crop.searchkick_index.refresh
 
     visit root_path
     fill_in 'q', with: 'pokemon'
@@ -75,7 +75,7 @@ describe 'Crop search', :js do
       before do
         FactoryBot.create_list(:crop, 10)
         FactoryBot.create(:crop, name: 'radish')
-        Crop.searchkick_index.refresh
+        # Crop.searchkick_index.refresh
       end
       it 'finds the radish' do
         visit root_path
@@ -109,7 +109,7 @@ describe 'Crop search', :js do
 
   it 'has a top nav bar' do
     FactoryBot.create_list(:crop, 10)
-    Crop.searchkick_index.refresh
+    # Crop.searchkick_index.refresh
 
     visit crop_search_via_get_path(cropsearch: { q: 'red' })
     fill_in 'q', with: crop.name

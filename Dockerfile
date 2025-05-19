@@ -1,36 +1,32 @@
-#
-# Image name: openfarm-webapp
-#
+# Stage 1: Ruby 2.7 Webapp (Apple Silicon compatible)
+FROM ruby:2.7 AS webapp
 
-FROM       ruby:2.6.3
-MAINTAINER https://github.com/FarmBot/OpenFarm
+# Install system dependencies and ARM-compatible Chromium
+RUN apt-get update -qq && \
+    apt-get install -y \
+    build-essential \
+    libpq-dev \
+    nodejs \
+    libvips \
+    libvips-dev \
+    chromium \
+    chromium-driver
 
-ENV     PHANTOM_JS_VERSION 1.9.8
-
-# Install phantomjs in /usr/local/bin
-RUN     set -x; \
-  curl -o /tmp/phantomjs.tar.bz2 -SL "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-${PHANTOM_JS_VERSION}-linux-x86_64.tar.bz2" \
-  && mkdir /tmp/phantomjs \
-  && tar -xf /tmp/phantomjs.tar.bz2 -C /tmp/phantomjs --strip-components=1 \
-  && mv /tmp/phantomjs/bin/phantomjs /usr/local/bin/ \
-  && rm -rf /tmp/phantomjs* \
-  && phantomjs --version
-
-# Add the Gemfile and Gemfile.lock, then run `bundle install`
-ADD     Gemfile /openfarm/Gemfile
-ADD     Gemfile.lock /openfarm/Gemfile.lock
+# Set working directory
 WORKDIR /openfarm
 
-RUN     jobs="$(nproc)"; \
-  set -x; \
-  bundle config build.nokogiri --use-system-libraries \
-  && bundle install --jobs "$jobs" --without development
+# Install gems
+COPY Gemfile Gemfile.lock ./
+RUN gem install bundler -v 2.3.26
+RUN bundle config build.nokogiri --use-system-libraries \
+  && bundle install --jobs 4 --retry 3
 
-# ADD code for production, this will be replaced by a volume during development
-ADD     . /openfarm
+# Copy the rest of the app
+COPY . .
 
-# Environment is passed in from the host environment, disable the warning
-RUN     touch /openfarm/config/app_environment_variables.rb
+# Set Puppeteer environment in case it's used
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
-CMD [ "rails", "server", "-P", "tmp/pids/docker.pid" ]
-EXPOSE  3000
+# Start the Rails server
+CMD ["rails", "s", "-b", "0.0.0.0"]

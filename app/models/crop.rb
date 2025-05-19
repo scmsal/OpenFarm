@@ -6,7 +6,7 @@ class Crop
   include Mongoid::Slug
   include Mongoid::Taggable
 
-  searchkick
+  # searchkick
 
   field :impressions_field, default: 0, type: Integer
 

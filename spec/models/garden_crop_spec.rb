@@ -26,7 +26,7 @@ describe GardenCrop do
     Guide.collection.drop
     FactoryBot.create(:guide)
 
-    expect_any_instance_of(Guide).to receive(:reindex)
+    # expect_any_instance_of(Guide).to receive(:reindex)
 
     FactoryBot.create(:user)
   end

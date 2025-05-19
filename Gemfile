@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 gem 'bundler'
 gem 'rails'
+# gem 'opensearch-ruby'
 
 # We can't upgrade to Mongoid 7 unless someone has
 # time to manually QA the failed view specs that
@@ -21,9 +22,9 @@ gem 'mongoid_taggable'
 gem 'active_model_serializers'
 gem 'aws-sdk-rails'
 gem 'aws-sdk-s3'
-gem 'bson_ext'
+# gem 'bson_ext'
 
-gem 'searchkick'
+# gem 'searchkick'
 
 gem 'coffee-rails'
 gem 'devise'
@@ -92,7 +93,7 @@ group :test do
   gem 'capybara-angular'
   gem 'coveralls'
   gem 'database_cleaner'
-  gem 'phantomjs'
+  # gem 'phantomjs'
   gem 'selenium-webdriver'
   gem 'simplecov'
   gem 'smarf_doc'
@@ -106,3 +107,9 @@ group :production, :staging do
   gem 'rails_12factor'
   gem 'thin'
 end
+
+
+# group :production do
+#   gem 'elasticsearch-model'
+#   gem 'elasticsearch-rails'
+# end

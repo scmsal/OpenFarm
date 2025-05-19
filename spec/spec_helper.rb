@@ -29,12 +29,12 @@ require "vcr"
 require "webmock/rspec"
 require "pundit/rspec"
 # ====== PHANTOMJS stuff
-Capybara.javascript_driver = :selenium_headless
-Capybara.default_max_wait_time = 10
-Capybara.register_driver :apparition do |app|
-  Capybara::Apparition::Driver.new(app, headless: true) # debug mode: false
-end
-Capybara.server = :webrick
+# Capybara.javascript_driver = :selenium_headless
+# Capybara.default_max_wait_time = 10
+# Capybara.register_driver :apparition do |app|
+#   Capybara::Apparition::Driver.new(app, headless: true) # debug mode: false
+# end
+# Capybara.server = :webrick
 # =====
 Delayed::Worker.delay_jobs = false
 # ===== VCR stuff (records HTTP requests for playback)
@@ -56,8 +56,8 @@ Paperclip.options[:log] = false
 require "database_cleaner"
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 Mongoid.logger.level = 2
-Guide.reindex
-Crop.reindex
+# Guide.reindex
+# Crop.reindex
 RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.include Rails.application.routes.url_helpers

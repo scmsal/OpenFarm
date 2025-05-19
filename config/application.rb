@@ -1,8 +1,11 @@
+
+
 require File.expand_path('../boot', __FILE__)
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'sprockets/railtie'
 Bundler.require(:default, Rails.env)
+require_relative 'app_environment_variables'
 
 module OpenFarm
   class Application < Rails::Application

@@ -6,7 +6,7 @@ class Guide
 
   attr_accessor :current_user_compatibility_score
 
-  searchkick(callbacks: :async)
+  # searchkick(callbacks: :async)
 
   # The below seems to have made no difference, but it's based on:
   # https://github.com/ankane/searchkick#stay-synced
