@@ -1,7 +1,7 @@
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
-
+  
   has_many :guides
   has_many :gardens
 
@@ -52,7 +52,7 @@ class User
   field :confirmation_sent_at, :type => Time
   field :unconfirmed_email,    :type => String
 
-  has_merit
+  # has_merit  --- removed this because the app has errors
 
   after_save :create_garden_if_none
 

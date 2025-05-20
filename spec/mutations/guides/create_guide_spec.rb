@@ -76,7 +76,7 @@ describe Guides::CreateGuide do
   it 'knows to choose a crop based on a crop name' do
     params.except!(:crop_id)
     params[:crop_name] = FactoryBot.create(:crop).name
-    Crop.reindex
+    # Crop.reindex
     result = cg.run(params).result
     expect(result).to be_a(Guide)
     expect(result.valid?).to be(true)

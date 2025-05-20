@@ -1,14 +1,16 @@
 require 'factory_bot_rails'
 if Rails.env != 'production' # <= Prevent catastrophe
   Mongoid.purge!
-  admin = FactoryBot.create(:user, admin: true,
+  admin = FactoryBot.create!(:user, admin: true,
                              email: 'admin@admin.com',
                              password: 'admin123',
                              password_confirmation: 'admin123',
                              confirmed_at: Date.today)
 
-  FactoryBot.create(:garden, user: admin)
+  FactoryBot.create!(:garden, user: admin)
 
+  puts "🌱 Seeding started..."
+  
   # Creating some common test crops
   tomato = FactoryBot.create(:crop, name: 'Tomato')
   cherry = FactoryBot.create(:crop, name: 'Cherry')
@@ -104,4 +106,12 @@ if Rails.env != 'production' # <= Prevent catastrophe
   dormant.stage_action_options = [prune, cover, tap]
 
   Guide.all.each{ |gde| gde.update_attributes(user: admin) }
+
+  
+Crop.create!(name: 'Tomato')
+puts "✅ Created Tomato crop"
+
+# More models...
+puts "✅ Seeding complete"
+
 end

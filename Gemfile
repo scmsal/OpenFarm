@@ -69,7 +69,7 @@ gem 'foundation-rails'
 gem 'sprockets'
 gem 'sprockets-es6'
 
-gem 'compass-rails'
+# gem 'compass-rails'
 gem 'jquery-rails'
 gem 'letter_opener', group: :development
 gem 'ng-rails-csrf'

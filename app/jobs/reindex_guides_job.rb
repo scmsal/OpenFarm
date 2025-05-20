@@ -3,7 +3,7 @@ class ReindexGuidesJob < ActiveJob::Base
 
   def perform
     Guide.desc(:popularity_score).each do |guide|
-      guide.reindex
+      # guide.reindex
     end
   end
 end
