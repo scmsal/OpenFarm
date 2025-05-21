@@ -1,16 +1,20 @@
 require 'factory_bot_rails'
+
+
+
 if Rails.env != 'production' # <= Prevent catastrophe
   Mongoid.purge!
-  admin = FactoryBot.create!(:user, admin: true,
+  admin = FactoryBot.create(:user, admin: true,
                              email: 'admin@admin.com',
                              password: 'admin123',
                              password_confirmation: 'admin123',
-                             confirmed_at: Date.today)
+                             confirmed_at: Date.today,
+                             display_name: 'Admin')
 
-  FactoryBot.create!(:garden, user: admin)
+  FactoryBot.create(:garden, user: admin)
 
   puts "🌱 Seeding started..."
-  
+
   # Creating some common test crops
   tomato = FactoryBot.create(:crop, name: 'Tomato')
   cherry = FactoryBot.create(:crop, name: 'Cherry')
